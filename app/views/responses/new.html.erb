@@ -1,0 +1,22 @@
+<h1>Post a response</h1>
+<%= flash_notice %>
+
+<div class="form">
+  <fieldset>
+
+  <% form_for :response, :url => { :action => "create" } do |f| %>
+
+
+  <p>
+    <%= f.label :response_contents %><br />
+    <%= f.text_area :response_contents %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+
+  </fieldset>
+</div>
+

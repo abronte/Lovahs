@@ -1,0 +1,5 @@
+<% if current_user == @user %>
+	<%= render :partial => "current_user", :object => current_user %>
+<% else %>
+	<%= render :partial => "other_user", :object => @user %>
+<% end %>

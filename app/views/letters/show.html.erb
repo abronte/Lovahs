@@ -1,0 +1,49 @@
+<%= flash_notice %>
+
+<% title(@letter.title + " | A Lovahs.com love letter") %>
+
+<% tag_string = "" %>
+<% for tag in @letter.tag_list %>
+	  <% tag_string = tag_string + tag %>
+	  <% if tag != @letter.tag_list.last %>
+	  	<% tag_string = tag_string + ", " %>
+	  <% end %> 
+<% end %>
+
+<% meta('<meta name="keywords" content="' + tag_string + ', Love Letter">') %>
+<% meta('<meta name="description" content="Another Great Love Letter on Lovahs.com">') %>
+
+<%= render :partial => "letter", :object => @letter %>
+
+
+<div class="comment-container">
+      <h1>Comments (<%= @letter.responses.size%>) | <a href="#">Leave a Comment</a></h1>
+
+  <%= render :partial => "responses/response", :collection => @letter.responses %>
+
+</div>
+
+<div style="clear:both;"></div>
+
+<div class="comment-post">
+<% if current_user %>
+<h1>Post a comment</h1>
+
+<%= error_messages_for :response -%>
+<div class="form">
+  <fieldset>
+  <p>
+  	<% form_for :response, :url => { :controller => "responses", :action => "create", :letter_id => @letter.id } do |f| %>
+  	<%= f.text_area :response_contents %>
+  </p>
+  <p>
+    <%= f.submit "Post" %>
+  </p>
+  </fieldset>
+</div>
+
+	<% end %>
+<% else %>
+<%= link_to "Sign in", :controller => "user_sessions", :action => "new" %> to post your response.
+<% end %>
+</div>

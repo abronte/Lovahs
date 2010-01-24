@@ -1,0 +1,35 @@
+******************************************
+*   Lovahs - love letters on demand      *
+******************************************
+
+==============
+Required Gems
+==============
+- Rails 2.3.4
+- authlogic
+- will_paginate 2.3.11
+- friendly_id
+- paperclip
+
+==============
+Install
+==============
+1. Rename config/database.yml.sample to config/database.yml
+2. Configure database.yml for your database setup
+3. Rename config/environment.sample to config/environment.rb
+4. Configure environment.rb so that the rails app works with your 
+   environment. See the troubleshooting section if you run into problems.
+
+==============
+Troubleshooting
+==============
+1. "gem install" cant find "mislav-will_paginate" or "thoughtbot-paperclip"  
+  
+  Install those two gems are in the gem repository as "will_paginage"
+  and "paperclip"
+
+2. Rails cannot find "mislav-will_paginate" or "thoughtbot-paperclip"
+
+  Those two gems are installed as "will_paginage" and "paperclip" and
+  you may need to edit the config.gem in the environment.rb file to 
+  fit those names.

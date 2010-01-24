@@ -1,0 +1,15 @@
+<% title(params[:id] + " on Lovahs.com: Love Letters on Demand")%>
+
+<div class="span-15 pageheader"><strong>Freshest Letters</strong> | Browse by: 
+  <form class="browse"><select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0, '/letters/tag/<%=params[:id]%>/')">
+    <option selected="selected">--select--</option>
+    <option value="">Freshest</option>
+    <option value="popular">Highest Rated</option>
+  </select></form>
+</div>
+
+<%= flash_notice %>
+
+<% for letter in @letters %>
+  <%= render :partial => "letter", :object => letter %>
+<% end %>

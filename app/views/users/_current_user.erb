@@ -1,0 +1,93 @@
+<div class="main-content">
+<strong>My Account</strong> | <%= link_to 'Edit My Account', edit_account_path %>
+
+<% form_for @user, :url => account_path do |f| %>
+<p class="mydescription"><strong>The one word that describes me best is: </strong>
+  <%= f.error_messages %>
+  <%= f.text_field :status %>
+  <input type="submit" value="Update" class="submit" />
+</p>
+<% end %>
+
+<h1>My Letters</h1>
+<p><%= flash_notice %></p>
+
+<table class="myletters">
+  <thead>
+
+    <tr>
+      <th>Posted</th>
+      <th>Title</th>
+      <th>Comments</th>
+      <th>Hearts</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% for letter in current_user.letters %>
+<tr class="<%= cycle("odd", "even") %>">
+  <td><%= letter.created_at.strftime '%m.%d.%Y' %></td>
+  <td><%= link_to letter.title, :controller => "letters", :action => "show", :id => letter.to_param %> (<%= link_to "edit", :controller => "letters", :action => "edit", :id => letter.id %>) (<%= link_to "delete", {:controller => "letters", :action => "destroy", :id => letter.id}, :confirm => "Are you sure you want to delete this letter?" %>)</td>
+  <td><%= letter.responses.size.to_s %></td>
+  <td><%= letter.favorites.size.to_s %></td>
+</tr>
+<% end %>
+  </tbody>
+</table>
+
+<hr />
+<h1>My Favorite Letters</h1>
+
+<table class="myletters">
+  <thead>
+    <tr>
+      <th>Posted</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Comments</th>
+      <th>Hearts</th>
+    </tr>
+  </thead>
+  <tbody>
+<% for letter in current_user.favorite_letters %>
+<tr class="<%= cycle("odd", "even") %>">
+  <td><%= letter.created_at.strftime '%m.%d.%Y' %></td>
+  <td><%= link_to letter.title, :controller => "letters", :action => "show", :id => letter.to_param %></td>
+  <td><%= link_to letter.user.login_username, :controller => "users", :action => "show", :id => letter.user.login_username %></td>
+  <td><%= letter.responses.size.to_s %></td>
+  <td><%= letter.favorites.size.to_s %></td>
+</tr>
+<% end %>
+
+  </tbody>
+</table>
+
+<hr />
+
+<h1>My Favorite Users</h1>
+
+<table class="myletters">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Letters</th>
+      </tr>
+  </thead>
+  <tbody>
+<% for fu in current_user.favorite_users %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td><%= link_to fu.login_username, :controller => "users", :action => "show", :id => fu.login_username %> </td>
+      <td><%= fu.letters.size.to_s %></td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+
+
+

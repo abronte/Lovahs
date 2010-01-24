@@ -1,0 +1,10 @@
+xml.instruct!
+
+xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
+@letters.each do |post|
+ xml.url do
+   xml.loc url_for(:controller => 'letters',:action => 'show', :id => post.to_param,:only_path => false)
+   xml.lastmod post.updated_at.to_date
+ end
+end
+end

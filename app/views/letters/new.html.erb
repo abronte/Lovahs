@@ -1,0 +1,16 @@
+<h1>Write a Letter</h1>
+
+<%= flash_notice %>
+<div class="form">
+  <%= error_messages_for :letter -%>
+
+  <fieldset>
+  <% form_for :letter, :url => { :action => "create" } do |form| %>
+		<%= render :partial => 'form', :object => form %>
+    <%= submit_tag "Save Letter" %>
+	<%= link_to "Cancel", @cancel_url %>
+  <% end %>
+  </fieldset>
+</div>
+
+

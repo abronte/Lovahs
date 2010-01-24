@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<% if yield(:meta) %><%=yield(:meta)%><%end%>
+<title><% if yield(:title) %><%=yield(:title)%><%else%>Lovahs.com: Love Letters on Demand<%end%></title>
+<link href="/stylesheets/screen.css" type="text/css" rel="stylesheet" />
+<link href="/stylesheets/print.css" type="text/css" rel="stylesheet" media="print" />
+<!--[if IE]>
+    <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen, projection" />
+  <![endif]-->
+<link href="/stylesheets/lovahs.css" type="text/css" rel="stylesheet" />
+<%= javascript_include_tag "prototype" %>
+<script type="text/javascript">
+<!--
+function MM_jumpMenu(targ,selObj,restore, url){ //v3.0
+  eval(targ+".location=(url?url:'')+'"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<%= javascript_include_tag "jquery/jquery-1.3.2.min.js" %>
+<%= javascript_include_tag "jquery/ui.core.js" %>
+<%= javascript_include_tag "jquery/ui.dialog.js" %>
+<script>
+	// http://docs.jquery.com/Using_jQuery_with_Other_Libraries
+	var $j = jQuery.noConflict();
+</script>
+<link href="/javascripts/jquery/css/flick/jquery-ui-1.7.2.custom.css" type="text/css" rel="stylesheet" />
+<%= javascript_include_tag "share.js" %>
+</head>
+
+<body>
+<div id="superbar">
+  <div class="container">
+    <div class="utility_nav">
+    <% if current_user %>
+		<strong>Welcome, <%= current_user.login_username %>.	</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		My: <%= link_to "letters ("+current_user.letters.size.to_s+")", account_path %> | 
+		<%= link_to "favorites ("+current_user.favorite_letters.size.to_s+")", account_path %> | 
+		<%= link_to "connections ("+current_user.favorite_users.size.to_s+")", account_path %> | 
+		<!-- <a href="#">inbox (#)</a> | <%= link_to "account", account_path %> -->
+	</div>
+	<div class="utility_nav2">
+		<%= link_to "logout", user_session_path, :method => :delete %>
+		<% else %>
+	    <%= link_to "Register", new_account_path %> | 
+		<%= link_to "Log In", new_user_session_path %>
+		<% end %>
+	</div>
+  </div>
+</div>
+<div class="container wrapper">
+	<div class="main-column"><a href="/"><img src="/images/logo.gif" class="logo" /></a>
+	<%= link_to '<img src="/images/plus.gif" width="11" height="11" /> create a new love letter</a>',  {:controller => "letters", :action => "new"}, :class => "action_link" %>
+	  <div class="clear"></div>
+	  
+
+
+	    <%= yield :layout %>
+
+
+</div>
+<div class="sidebar-1">
+<div class="half-banner"><a href="http://www.poweroflove.org/" target="_blank"><img src="/images/234X60.gif" /></a></div>
+<h1>What is Lovahs?</h1><p>Lovahs is a community dedicated to writing, reviewing, sharing and discovering love letters.</p>
+<h2>Read Love Letters About</h2>
+	<div class="tagcloud">
+	<% tag_cloud get_tags, %w(nube1 nube2 nube3 nube4 nube5) do |name, css_class| %>
+		<%= link_to name, {:controller => "letters", :action => "tag", :id => name}, :class => css_class %>
+	<% end %>
+	</div>
+</div>
+</div>
+<div id="footer">
+  <div class="container">
+  <div class="footer-content">
+  	&copy; Copyright <%=Time.new.year%> Lovahs.com. All rights reserved | 
+	<a href="/privacy">Privacy Policy</a> |
+	<a href="/terms">Terms of Use</a> |
+	<%= pluralize User.logged_in.count, "user" %> logged in
+	</div>
+  </div>
+</div>
+<%= render :partial => "/layouts/share" %>
+<!-- google analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11248618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
+
+

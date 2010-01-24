@@ -1,0 +1,10 @@
+	
+	
+<div class="comment">
+	<div class="comment-info"><span class="date"><%= response.created_at.strftime '%m.%d.%Y %I:%M%p' %></span><br>
+	  posted by:<br>
+	  <%= link_to response.user.login_username, :controller => "users", :action => "show", :id => response.user.login_username %><br>
+	</div>
+	<div class="comment-text"><%= h(response.response_contents) %></div><div class="comment-bottom"></div>
+</div>
+	

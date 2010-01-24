@@ -1,0 +1,24 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value
+
+trishs_letter:
+    user: trish
+    title: San Franscisco How I Love Thee
+    contents: San Francisco is a city beyond words and cliches. It sometimes feels impossible to come up with something adequate to describe a town like this and most of it has all been said...
+
+
+ginas_letter:
+    user: gina
+    title: Google Voice, You Rock My Voicemail
+    contents: Transcriptions, SMS, searchable inbox, universal phone number, whitelists, and blacklists. There's nothing more I could ask for in the perfect VOIP application. Google Voice, you complete me.
+    
+kellys_letter:
+    user: kelly
+    title: A Loved Man Again
+    contents: Once again, I had a great time with you this weekend. I'm thinking next weekend I'll bust out the spoons, plates, pots and pans and make you one of my "hostage" stews. You know, the kind where we stay in all weekend and do nothing but watch movies, drink wine, eat and sleep because I've locked you in with lavish love. Or perhaps a hearty soup with the warm bread I baked this morning. Consider it my way of thanking you for all you've done to make me feel like a loved man again.
+

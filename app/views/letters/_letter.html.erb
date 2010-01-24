@@ -1,0 +1,47 @@
+<div class="item-header"><%= link_to letter.title, {:controller => "letters", :action => "show", :id => letter.to_param}, {:class => "title"}%>
+	<div class="letter-actions">
+ 	<a href="javascript:void(0);"><img id="letter-id-<%=letter.id%>" src="/images/sendletter.gif" class="share_by_email" /></a>
+	<% if current_user %>
+	<% #if current_user.has_favorite?(letter) %>
+	<% if current_user.favorite_letters.find {|e| e.id == letter.id } %>
+		<%= link_to_remote '<span id="fav-'+letter.id.to_s+'"><img class="heart-button" src="/images/heart-button-on.gif" /></span>', :update => "fav-"+letter.id.to_s, :url => {:controller => 'letters', :action => 'toggle_favorite', :id => letter} %>
+	<% else %>
+		<%= link_to_remote '<span id="fav-'+letter.id.to_s+'"><img class="heart-button" src="/images/heart-button.gif" /></span>', :update => "fav-"+letter.id.to_s, :url => {:controller => 'letters', :action => 'toggle_favorite', :id => letter} %>
+	<% end end %>
+	</div>
+</div>
+
+<div class="item-body">
+<div class="timestamp span-5">category: <%= letter.letter_category.label %></div>
+<div class="timestamp span-5 last">posted: <%= letter.created_at.strftime '%m.%d.%Y - %I:%M%p' %></div>
+<div class="user span-10"><span class="male">
+<%= image_tag letter.user.avatar.url(:tiny) %> 
+<img src="/images/male.gif" /> 
+<%= link_to letter.user.login_username, :controller => "users", :action => "show", :id => letter.user.login_username %></span> 
+<% if current_user && current_user.id != letter.user.id %>
+<% #if current_user.has_favorite?(User.find(letter.user.id)) %>
+<% if current_user.favorite_users.find {|e| e.id == letter.user.id } %>
+<%= link_to_remote '<span id="favuser-'+letter.user.id.to_s+'">(remove friend)</span>', :update => "favuser-"+letter.user.id.to_s, :url => {:controller => "users", :action => 'toggle_favorite', :id => letter.user.login_username} %><% else %><%= link_to_remote '<span id="favuser-'+letter.user.id.to_s+'">(add friend)</span>', :update => "favuser-"+letter.user.id.to_s, :url => {:controller => "users", :action => 'toggle_favorite', :id => letter.user.login_username} %> <% end end %></div>
+  <div class="teaser">
+	<% if defined?truncate_text && truncate_text == true %>
+		<%=simple_format(truncate(letter.contents, :length => 250, :omission =>'...'))%>
+	<%else%>
+		<%= simple_format(letter.contents) %>
+	<%end%>
+	<br />
+	<% if letter.user == current_user %>
+    	<%= link_to "Edit this letter", :controller => "letters", :action => "edit", :id => letter.id %> 
+	<% elsif defined?truncate_text %>
+    	<%= link_to "Continue reading letter", :action => "show", :id => letter.id %> 
+	<% end %>
+	</div>
+	</div>
+	<div class="divide"></div><div class="item-footer"><div class="tags"><% if letter.tag_list.size > 0 %> tags: <% for tag in letter.tag_list %>
+	  <%= link_to tag, { :controller => "letters", :action => :tag, :id => tag }, :class => "my class" %><% if tag != letter.tag_list.last %>, <% end %> 
+	<% end %> <% else %> no tags <% end %>
+</div>
+  <div class="comment-summary"><%= link_to "comments", :controller => "letters", :action => "show", :id => letter.id %> (<%= link_to letter.responses.size, :action => "show", :id => letter.to_param %>) | <%= letter.cached_total_favorites %><img src="/images/heart.gif" width="10" height="9" />s</div>
+  <div class="clear"></div>
+</div>
+
+

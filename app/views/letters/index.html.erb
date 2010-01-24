@@ -1,0 +1,17 @@
+<div class="span-15 pageheader"><strong><% if params[:id] == "popular"%>Highest Rated<% else %>Freshest<% end %> Letters</strong> | Browse by: 
+  <form class="browse"><select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+    <option selected="selected">--select--</option>
+    <option value="/">Freshest</option>
+    <option value="/letters/index/popular/">Highest Rated</option>
+<!--<option>Most Viewed</option>
+<option>Staff Favorites</option>-->
+  </select></form>
+</div>
+
+<%= flash_notice %>
+
+<% for letter in @letters %>
+  <%= render :partial => "letter", :object => letter, :locals => {:truncate_text => true}%>
+<% end %>
+
+<%= will_paginate @letters %>

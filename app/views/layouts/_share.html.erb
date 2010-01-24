@@ -1,0 +1,16 @@
+<div id="dialog_share_by_email" title="Send Letter" style="display:none;">
+	<span id="validateTips"></span>
+	<form id="dialog_share_by_email_form">
+		<input type="hidden" id="dialog_share_by_email_letter_id" name="id" value="" />
+		<label for="email">Email To</label>
+		<br />
+		<input type="text" name="email" id="dialog_share_by_email_email" value="" class="text ui-widget-content ui-corner-all" value="" />
+		<br />
+		<label for="name">Your Name</label>
+		<br />
+		<input type="text" name="name" id="dialog_share_by_email_name" class="text ui-widget-content ui-corner-all" value="<% if current_user %><%= current_user.login_username %><%end%>" />
+		<br />
+		<label for="email">Message (optional)</label>
+		<textarea name="message" id="dialog_share_by_email_message" class="text ui-widget-content ui-corner-all" style="display:block;width:300px;height:75px;"></textarea>
+	</form>
+</div>

@@ -1,0 +1,15 @@
+<div class="main-content">
+<p class="description">
+	<%= image_tag @user.avatar.url(:medium), :class => 'user-avatar' %> <img src="images/female.gif"> <span class="female"><%= @user.login_username %> is:</span> <%= (@user.status || "in love") %></p>
+
+
+<h1><%= @user.login_username %>'s letters <!-- | <a href="#">contact <%= @user.login_username %></a>--> </h1>
+  </div>
+<%= flash_notice %>
+
+
+<% for letter in @user.letters %>
+	<%= render :partial => "letters/letter", :object => letter %>
+<% end %>
+	
+	

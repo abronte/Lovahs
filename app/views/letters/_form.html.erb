@@ -1,0 +1,17 @@
+<div>
+  <%= form.label :title %>:<br />
+  <%= form.text_field :title, :class => "short" %>
+</div>
+<div>
+  <%= form.label :letter_category %>:<br />
+  <%= form.select :letter_category_id, @letter_categories %>	
+</div>
+<div>
+  <%= form.label :contents %>:<br />
+  <%= form.text_area :contents %>
+</div>
+<div>
+  <%= form.label :tag_list %>:<br />
+  <%= form.text_field :tag_list, :class => "short" %>
+</div>
+

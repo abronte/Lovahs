@@ -1,0 +1,14 @@
+<h1>Edit Letter</h1>
+
+<%= flash_notice %>
+<div class="form">
+  <%= error_messages_for :letter -%>
+
+  <fieldset>
+  <% form_for :letter, :url => { :action => "update", 
+                                  :id => @letter.id } do |form| %>
+		<%= render :partial => 'form', :object => form %>
+    <%= submit_tag "Save Changes" %>     <%= link_to "cancel", :controller => "users", :action => "show", :id => current_user.id %>
+  <% end %>
+</fieldset>
+</div>
