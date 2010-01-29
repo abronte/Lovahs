@@ -71,6 +71,11 @@ function MM_jumpMenu(targ,selObj,restore, url){ //v3.0
 		<%= link_to name, {:controller => "letters", :action => "tag", :id => name}, :class => css_class %>
 	<% end %>
 	</div>
+<br/>
+<h2>Top Letters</h2>
+<% for letter in get_top_letters %>
+   <%= letter.cached_total_favorites %> x <img src="/images/heart.gif" width="10" height="9" /> <%= link_to letter.title, {:controller => "letters", :action => "show", :id => letter.to_param}, {:class => "title"}%><br/>
+<% end %>
 </div>
 </div>
 <div id="footer">

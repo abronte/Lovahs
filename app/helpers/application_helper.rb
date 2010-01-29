@@ -35,4 +35,9 @@ module ApplicationHelper
       yield t.name, classes[(t.count.to_i - min) / divisor]
     }
   end
+
+  def get_top_letters
+    Letter.find(:all, :order => "cached_total_favorites DESC", :limit => 5)    
+  end
+
 end
