@@ -75,6 +75,7 @@ class LettersController < ApplicationController
 
   def toggle_favorite
     @letter = Letter.find(params[:id])
+
     #if current_user.has_favorite?(@letter)
     #had to implement the workaround below, the function above always returns false
     if current_user.favorite_letters.find {|e| e.id == @letter.id }
@@ -82,11 +83,13 @@ class LettersController < ApplicationController
       @letter.cached_total_favorites = @letter.cached_total_favorites-1
       @letter.save
       render :text => '<img class="heart-button" src="/images/heart-button.gif" />'
-    else
+    elsif current_user.id != @letter.user_id
       current_user.has_favorite(@letter)
       @letter.cached_total_favorites = @letter.cached_total_favorites+1
       @letter.save
       render :text => '<img class="heart-button" src="/images/heart-button-on.gif" />'
+    else
+      render :text => '<img class="heart-button" src="/images/heart-button.gif" />'
     end
   end
 
