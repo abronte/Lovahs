@@ -1,6 +1,14 @@
 <div class="main-content">
 <p class="description">
-	<%= image_tag @user.avatar.url(:medium), :class => 'user-avatar' %> <img src="images/female.gif"> <span class="female"><%= @user.login_username %> is:</span> <%= (@user.status || "in love") %></p>
+	<%= image_tag @user.avatar.url(:medium), :class => 'user-avatar' %> 
+  <% if @user.gender.eql? "f" %>
+    <img src="/images/female.gif"> <span class="female"><%= @user.login_username %> is:</span> 
+  <% elsif @user.gender.eql? "m" %>
+    <img src="/images/male.gif"> <span class="male"><%= @user.login_username %> is:</span> 
+  <% else %>
+    <%= @user.login_username %> is:
+  <% end %>
+  <%= (@user.status || "in love") %></p>
 
 
 <h1><%= @user.login_username %>'s letters <!-- | <a href="#">contact <%= @user.login_username %></a>--> </h1>
